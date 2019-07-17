@@ -192,6 +192,7 @@ print(my_tuple[3])
 
 #-----------------------------
 # Set
+# not ordered
 print('Set')
 nonunique_list = [20, 21, 22, 21, 20]
 unique_list = set(nonunique_list)
@@ -467,7 +468,7 @@ while (count < 9):
 for i in range(1, 6, 2):
     print(i)
 
-loop_list = [1,2,3,4,5]
+loop_list = [21,32,43,54,65]
 for i in range(len(loop_list)):
     print(i, end=', ')
 print(end='\n')
@@ -986,6 +987,7 @@ if func_thread.isAlive():
 
 #---------------------------------------------------
 # Logging
+
 
 
 #---------------------------------------------------
