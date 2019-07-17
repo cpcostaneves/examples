@@ -186,6 +186,9 @@ print(my_list[1])
 my_list[1] = 60
 print(my_list[1])
 
+# Cannot create position using [] (only using methods, eg. append)
+#my_list[10] = 70
+
 #-----------------------------
 # Tuple
 print('Tuple')
@@ -206,14 +209,20 @@ print(basket)
 
 #-----------------------------
 # Dict
+# not ordered, duplicated keys not allowed (last one rules
+# # keys must be of immutable type (number, string, tuple, but not list)
 print('Dict')
 my_dict = {'key1': 'val1', 'key2': 'val2', 'key3': 'val3'}
 print(my_dict['key2'])
 my_dict['key2'] = 'val4'
 print(my_dict['key2'])
-for k, v in my_dict.items():
-    print(k, ' = ', v)
 
+# Can create new key, value using []
+my_dict['key10'] = 'val5'
+
+# Create using dict
+my_dict_defined = dict([('key1','val1'),('key2','val2')]) 
+print(my_dict_defined)
 
 #-----------------------------
 # iterable interface: An object capable of returning its members one at a time (iter() returns an iterator object).
@@ -224,9 +233,9 @@ for k, v in my_dict.items():
 #              A function that uses yield returns a generator.
 
 #-----------------------------
-# Sequence operations
+# Sequence operations (for list, tuple, set)
 
-print('Sequence and Mapping operations')
+print('Sequence operations')
 my_list = [19, 20, 21, 'apple', 23]
 
 # Access element
@@ -263,6 +272,8 @@ print(max(num_list))
 #-----------------------------
 # Nested sequences and matrix
 
+print('Nested sequences and matrix')
+
 # Nested sequences
 nested_list = [19, 20, 21, [30, 31, 32]]
 print(nested_list[3][1])
@@ -271,6 +282,56 @@ print(nested_list[3][1])
 matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 print(matrix[2][2])
 
+#-----------------------------
+# Lists and strings
+
+print('Lists and strings')
+
+my_text = 'this is a string'
+
+# Split string to a list (default separator is blank space)
+my_text_split_list = my_text.split()
+print(my_text_split_list)
+
+# Join list to string using separator
+my_text_joined = '_'.join(my_text_split_list)
+print(my_text_joined)
+
+#-----------------------------
+# Mapping operations (for dict)
+
+print('Mapping operations')
+
+my_dict = {'key1': 'val1', 'key2': 'val2', 'key3': 'val3'}
+
+# Delete element
+del my_dict['key2']
+print(my_dict)
+
+# length
+print(len(my_dict))
+
+# get lists
+print(list(my_dict.keys()))
+print(list(my_dict.values()))
+
+
+#-----------------------------
+# Sequence and mappings methods
+
+print('Sequence and mappings methods')
+
+# Sequence and mappings (list, tuple, set, dict) are classes with data handling methods
+
+list_met = [1, 2, 4, 2, 4]
+list_met.append(3)
+print(list_met)
+
+print(list_met.count(4))
+print(list_met.index(3))
+
+list_met.insert(3, 5)
+print(list_met)
 
 #-----------------------------
 # Built-in collections have Functions to handle data
@@ -309,6 +370,7 @@ print(new_list)
 print('IDs')
 print(id(new_list))
 print(id(ref_list))
+print(new_list is ref_list)
 
 
 # Cloning
@@ -320,6 +382,7 @@ print(new_list)
 print('IDs')
 print(id(new_list))
 print(id(other_list))
+print(new_list is other_list)
 
 
 #-----------------------------
@@ -417,11 +480,16 @@ for i in range(len(loop_list)):
     print(i, end=', ')
 print(end='\n')
 
-
 # sequence loop (list, tuple, set)
 for element in loop_list:
     print(element, end=' , ')
 print(end='\n')
+
+# mapping loop (dict)
+my_dict = {'key1': 'val1', 'key2': 'val2', 'key3': 'val3'}
+for k, v in my_dict.items():
+    print(k, ' = ', v)
+
 
 # Behind the scenes, the for statement calls iter() on the container object. The iter() returns an iterator object 
 # that defines the method __next__() which accesses elements in the container one at a time.
