@@ -3,9 +3,22 @@
 # Start script
 
 #-----------------------------------------------
-# Print hello
+# Output
 print('-----------------------------------------------')
+
+# Print hello
 print('Hello Python')
+
+# Change line ending
+print('no line braking', end='')
+
+# after change end, must restore
+#print(end='\n')
+
+print('Hello Python')
+print('Hello Python')
+
+
 
 #-----------------------------------------------
 # Comments
@@ -18,6 +31,412 @@ print('Comment') # This is again comment
 This is a multiline
 comment.
 '''
+
+#-----------------------------------------------
+# Quotes
+
+# Python accepts single ('), double (")
+str_word = 'word'
+str_sentence = "This is a sentence."
+
+# Triple (''' or """) quotes used to span across multiple lines
+str_paragraph = """This is a paragraph. It is
+made up of multiple lines and sentences."""
+
+#-----------------------------------------------
+# Multi-Line Statements
+print('----------------------------------------------')
+print('Multi-Line Statements')
+
+# Statements typically end with a new line. Line continuation character = backslash (\) denote that the line should continue.
+total = 1 + \
+        2 + \
+        3
+
+# Statements contained within the [], {}, or () brackets do not need to use the line continuation character.
+days = ['Monday', 'Tuesday', 'Wednesday',
+        'Thursday', 'Friday']
+
+
+#-----------------------------------------------
+# Basic Variable types
+print('-----------------------------------------------')
+print('Basic variable types')
+
+# main built-in types are numerics, sequences, mappings, classes, instances and exceptions.
+
+#-----------------------------
+# Assignment
+# type is defined according to value
+# Numeric
+this_is_int = 8
+this_is_float = 15.4
+this_is_complex = 3e-4 + 1j
+
+# String
+this_is_string = 'A string'
+
+#-----------------------------
+# dynamically typed language: variable name is bound only to an object not a type
+var1 = 5
+var1 = 'Now a string'
+
+var2 = 15
+
+# strongly typed language: explicit conversion is required
+new_str = var1 + str(var2)
+print(new_str)
+
+
+#-----------------------------
+# Multiple Assignment
+# Single value to several variables
+a = b = c = 1
+# Assign multiple objects to multiple variables
+a, b, c = 1,2,"john"
+
+# change order
+a, b = b, a
+
+#-----------------------------------------------
+# Numeric Types - math operations
+
+# built in
+print(abs(-8.2))
+
+# math Standard Library module (+ others like cmath)
+import math
+print(math.ceil(4.7))
+
+#-----------------------------------------------
+# Strings
+print('-----------------------------------------------')
+print('Strings')
+
+# - string: sequence of characters, immutable, defined with "" or '' or """ for multiline 
+
+# Slicing
+my_string = 'Hello Python'
+print(my_string)
+print(my_string[0])
+print(my_string[2:5])
+print(my_string[2:])
+print(my_string[5:-2])
+
+# string is immutable and does not support item assignment, eg: my_string[1] = 35
+
+# length
+print(len(my_string))
+
+# Repeat
+print (my_string * 2)
+
+# Concat
+my_new_string = my_string + ' more text'
+print(my_new_string)
+
+
+# Iterate
+for char in my_string:
+    print(char, end=' , ')
+print(end='\n')
+
+# Escaping chars, eg: \n , \\, \"
+my_string_escap = 'text with escape chars: \" , \\ \n'
+my_string_squot = "text with 'single quotes' "
+my_string_dquot = 'text with "double quotes" '
+print(my_string_escap)
+print(my_string_squot)
+print(my_string_dquot)
+
+# formating
+my_format = 'This is the first: {}, and this is the secoond: {}'.format(34, 'other string')
+print(my_format)
+
+my_format_ordered = 'This is the second: {1}, and this is the first: {0}'.format(34, 'other string')
+print(my_format_ordered)
+
+# formatter operations available (eg. pad, align)
+# ref: https://pyformat.info/
+
+
+# string methods, eg: find, strip, upper
+print(my_string.find('Py'))
+
+#-----------------------------------------------
+# Collections : containers used to store collections of data
+print('----------------------------------------------')
+print('Collections')
+
+# Built-in:
+# - list, sequence, mutable, usually homogeneous, defined with square brackets []
+# - tuple: sequence, immutable, faster than list, usually heterogeneous, defined with parenthesis ()
+# - set: sequence, unique elements, defined with  set() function or curly braces {}
+# - string: sequence of characters, immutable, defined with "" or '' or """ for multiline 
+# - dict (dictionary): mapping, maps key = value, defined with curly brackets and key value pair {'key': value}
+
+# Can hold any data type (not only numeric or strings)
+# Access element with: [index]
+
+#-----------------------------
+# List
+print('List')
+my_list = [20, 21, 22, 23]
+print(my_list[1])
+my_list[1] = 60
+print(my_list[1])
+
+#-----------------------------
+# Tuple
+print('Tuple')
+my_tuple = (10, 15, 20, 'dog')
+# tuple is immutable and does not support item assignment, eg: my_tuple[1] = 35
+print(my_tuple[1])
+print(my_tuple[3])
+
+#-----------------------------
+# Set
+print('Set')
+nonunique_list = [20, 21, 22, 21, 20]
+unique_list = set(nonunique_list)
+print(unique_list)
+
+basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+print(basket)
+
+#-----------------------------
+# Dict
+print('Dict')
+my_dict = {'key1': 'val1', 'key2': 'val2', 'key3': 'val3'}
+print(my_dict['key2'])
+my_dict['key2'] = 'val4'
+print(my_dict['key2'])
+for k, v in my_dict.items():
+    print(k, ' = ', v)
+
+
+#-----------------------------
+# iterable interface: An object capable of returning its members one at a time (iter() returns an iterator object).
+# iterable has 3 descendants: sequence, mapping, generator
+# - sequence: iterable with random access. supports slicing (eg list, tuple, set)
+# - mapping: elements accessed via keys instead of integers (eg. dict)
+# - generator: no random access, consume items in order. Only create items when iterate over them.
+#              A function that uses yield returns a generator.
+
+#-----------------------------
+# Sequence operations
+
+print('Sequence and Mapping operations')
+my_list = [19, 20, 21, 'apple', 23]
+
+# Access element
+print(my_list[1])
+
+# Assign if mutable
+my_list[1] = 60
+print(my_list)
+
+# Delete element if mutable
+del my_list[4]
+print(my_list)
+
+# slice (:)
+# slicing: create a slice (sequence subset) with start, stop, step
+print (my_list[2:])
+
+# concat (+)
+print(my_list + my_list)
+
+# repeat (*)
+print(my_list * 2)
+
+# length
+print(len(my_list))
+
+# members
+print(21 in my_list)
+
+# min, max (only for numeric only sequence) (uses Comparison Operators)
+num_list = [19, 20, 21, 23]
+print(max(num_list))
+
+#-----------------------------
+# Nested sequences and matrix
+
+# Nested sequences
+nested_list = [19, 20, 21, [30, 31, 32]]
+print(nested_list[3][1])
+
+# Matrix
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+print(matrix[2][2])
+
+
+#-----------------------------
+# Built-in collections have Functions to handle data
+
+# Python collections module:
+# - namedtuple(): factory function for creating tuple subclasses with named fields
+# - deque: list-like container with fast appends and pops on either end
+# - ChainMap: dict-like class for creating a single view of multiple mappings
+# - Counter: dict subclass for counting hashable objects
+# - OrderedDict: dict subclass that remembers the order entries were added
+# - defaultdict: dict subclass that calls a factory function to supply missing values
+
+#-----------------------------------------------
+# Variable type
+print('----------------------------------------------')
+print('Variable type')
+print(type(75))
+
+# Data type convertion (eg. float(), list())
+print('This is: ' + str(45))
+print(int('75'))
+
+#-----------------------------------------------
+# Objects and references
+print('----------------------------------------------')
+print('Objects and references')
+
+new_list = [19, 20, 21, 23]
+# Python works with object reference by default
+# Assigning just reference not copy to a new object
+ref_list = new_list
+print(new_list)
+ref_list[1] = 80
+print(new_list)
+
+print('IDs')
+print(id(new_list))
+print(id(ref_list))
+
+
+# Cloning
+other_list = new_list[:]
+print(new_list)
+other_list[1] = 90
+print(new_list)
+
+print('IDs')
+print(id(new_list))
+print(id(other_list))
+
+
+#-----------------------------
+# Delete a variable reference
+temp_var = 5
+del temp_var
+
+
+#-----------------------------
+# Booleans values: True, False
+
+#-----------------------------
+# Operators
+#- Arithmetic Operators (returns numeric value): +, -, *, /, ...
+#- Comparison (Relational) Operators (returns boolean value): == , != , >= , <, ...
+#- Assignment Operators: var = value , var += increment, -=, /=,  ...
+#- Logical Operators (returns boolean value):  and, or, e no
+#- Bitwise Operators (bit operations): & , |, ^, ...
+#- Membership Operators (element is member?): in , not in
+#- Identity Operators (same object?): is, is not
+
+# Note: take care of Precedence and Associativity of Operators 
+# Note: Change default behavior: Class methods, eg. __bool__() ; __len__()  ; __eq__()
+
+
+#-----------------------------
+# None statement
+
+# Null equivalent: None
+
+#-----------------------------------------------
+# Pass statement
+
+# pass
+# does nothing, used when a statement is required syntactically but the program requires no action
+if 1:
+    pass
+
+#-----------------------------------------------
+# Conditions
+print('----------------------------------------------')
+print('Conditions')
+
+#test_bool = True
+test_bool = False
+
+if test_bool:
+   print("True")
+else:
+   print("False")
+
+test_num = 0
+
+if test_num == 0:
+   print("Zero")
+elif test_num > 0: 
+   print("Positive")
+else:
+   print("Else")
+
+# Single line
+if ( True ) : print ("Single line")
+
+
+#-----------------------------------------------
+# Loops
+print('-----------------------------------------------')
+print('Loops')
+
+
+# while
+# while expression: 
+#   statements(s)
+
+count = 0
+while (count < 9):
+    count = count + 1
+
+# for loop works with iterator objects (with function set to start/stop loop and get next objects).
+
+# range: generate a sequence of integer numbers (range object)
+# range (stop)
+# range (start, stop[, step])
+# exclusive (stop not included)
+
+# for
+# for iterating_var in sequence:
+#   statements(s) 
+
+for i in range(1, 6, 2):
+    print(i)
+
+loop_list = [1,2,3,4,5]
+for i in range(len(loop_list)):
+    print(i, end=', ')
+print(end='\n')
+
+
+# sequence loop (list, tuple, set)
+for element in loop_list:
+    print(element, end=' , ')
+print(end='\n')
+
+# Behind the scenes, the for statement calls iter() on the container object. The iter() returns an iterator object 
+# that defines the method __next__() which accesses elements in the container one at a time.
+# When there are no more elements, __next__() raises a StopIteration exception which tells the for loop to terminate. 
+
+
+
+
+# Iterator behavior can be added to classes. Define  __iter__() and __next__() methods.
+# Generator (Function with 'yield' statement) creates an interator.
+
+# Python supports break and continue statements
+# Python supports 'else' statement after for and while (executed when loop has ended)
+
+
 
 #-----------------------------------------------
 print('-----------------------------------------------')
@@ -108,6 +527,16 @@ resulta, _ = my_function_multiple(20)
 print(resulta)
 
 #------------------------------------
+# Objects passed as arguments are referenced not copied
+def my_function_pass_ref(param):
+    param[2] = 70
+
+my_list_func = [1, 2, 3, 4]
+print(my_list_func)
+my_function_pass_ref(my_list_func)
+print(my_list_func)
+
+#------------------------------------
 # Docstrings
 # Docstrings describe what your function does
 # docstrings are placed in the immediate line after the function header and in between triple quotation marks.
@@ -127,6 +556,9 @@ my_lambda_function = lambda x: x*2
 
 print('\nLambda function:')
 print(my_lambda_function(100))
+
+#-----------------------------
+# Global vs Local Variables. Force local ('local')
 
 #-----------------------------------------------
 print('-----------------------------------------------')
@@ -188,203 +620,6 @@ print(myinstance.refnumber)
 print(myinstance.number)
 print(myinstance.name)
 
-#-----------------------------------------------
-print('-----------------------------------------------')
-print('Type basic')
-# Basic
-
-# dynamically typed language: variable name is bound only to an object not a type
-var1 = 5
-var1 = 'Now a string '
-var2 = 10
-
-# strongly typed language: explicit conversion is required
-new_str = var1 + str(var2)
-print(new_str)
-
-
-# None, True, False
-
-# principal built-in types are numerics, sequences, mappings, classes, instances and exceptions.
-
-# Operators
-#- Arithmetic Operators
-#- Comparison (Relational) Operators
-#- Assignment Operators
-#- Logical Operators
-#- Bitwise Operators
-#- Membership Operators
-#- Identity Operators
-
-# Note: Change default behavior: Class methods, eg. __bool__() ; __len__()  ; __eq__()
-
-# Numeric Types — int, float, complex
-# math operation (and math and cmath modules)
-
-
-# Multiple Assignment
-# Single value to several variables
-a = b = c = 1
-# Assign multiple objects to multiple variables
-a,b,c = 1,2,"john"
-
-
-# Global vs Local Variables. Force local ('local')
-
-# get variable type
-
-# Attributions (Multiples)
-
-# pass
-# does nothing, used when a statement is required syntactically but the program requires no action
-
-
-#-----------------------------------------------
-# Strings
-print('----------------------------------------------')
-print('Strings')
-
-# Python accepts single ('), double (")
-str_word = 'word'
-str_sentence = "This is a sentence."
-
-# Triple (''' or """) quotes used to span across multiple lines
-str_paragraph = """This is a paragraph. It is
-made up of multiple lines and sentences."""
-
-# formating
-# {0}.{1}.format
-
-#-----------------------------------------------
-# output
-# print(str, end='')
-
-# after change end, must restore
-#print(end='\n')
-
-#-----------------------------------------------
-# Conditionals
-print('----------------------------------------------')
-print('Conditionals')
-
-#test_bool = True
-test_bool = False
-
-if test_bool:
-   print("True")
-else:
-   print("False")
-
-test_num = 0
-
-if test_num == 0:
-   print("Zero")
-elif test_num > 0: 
-   print("Positive")
-else:
-   print("Else")
-
-
-
-#-----------------------------------------------
-# Loops
-print('-----------------------------------------------')
-print('Loops')
-
-# range: generate a sequence of integer numbers (range object)
-# range (stop)
-# range (start, stop[, step])
-# exclusive (stop not included)
-
-# for 
-for i in range(1, 6, 2):
-    print(i, end=', ')
-
-print(end='\n')
-
-loop_list = [1,2,3,4,5]
-for i in range(len(loop_list)):
-    print(i, end=', ')
-
-print(end='\n')
-
-
- # while
-count = 0
-while (count < 9):
-    count = count + 1
-
-
-# Behind the scenes, the for statement calls iter() on the container object. The iter() returns an iterator object 
-# that defines the method __next__() which accesses elements in the container one at a time.
-# When there are no more elements, __next__() raises a StopIteration exception which tells the for loop to terminate. 
-
-# break and continue Statements
-
-#-----------------------------------------------
-# Multi-Line Statements
-print('----------------------------------------------')
-print('Multi-Line Statements')
-
-# Statements typically end with a new line. Line continuation character = backslash (\) denote that the line should continue.
-# Statements contained within the [], {}, or () brackets do not need to use the line continuation character.
-
-total = 1 + \
-        2 + \
-        3
-
-
-days = ['Monday', 'Tuesday', 'Wednesday',
-        'Thursday', 'Friday']
-
-#-----------------------------------------------
-# Collections : containers used to store collections of data
-print('----------------------------------------------')
-print('Collections')
-
-# Built-in:
-# - list, sequence, mutable, usually homogeneous, defined with square brackets []
-# - tuple: sequence, immutable, faster than list, usually heterogeneous, defined with parenthesis ()
-# - set: sequence, unique elements, defined with  set() function or curly braces {}
-# - string: sequence characters, define with "" or '' or """ for multiline 
-# - dict (dictionary): mapping, maps key = value, defined with curly brackets and key value pair {'key': value}
-
-
-my_list = [20, 21, 22, 23]
-print(my_list[1])
-my_list[1] = 60
-print(my_list[1])
-
-my_tuple = (10, 15, 20, 'dog')
-# tuple does not support item assignment, eg: my_tuple[1] = 35
-print(my_tuple[1])
-print(my_tuple[3])
-
-nonunique_list = [20, 21, 22, 21, 20]
-unique_list = set(nonunique_list)
-print(unique_list)
-
-basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
-print(basket)
-
-my_dict = {'key1': 'val1', 'key2': 'val2', 'key3': 'val3'}
-print(my_dict['key2'])
-my_dict['key2'] = 'val4'
-print(my_dict['key2'])
-for k, v in my_dict.items():
-    print(k, ' = ', v)
-
-# iterable interface: An object capable of returning its members one at a time (iter() returns an iterator object).
-# iterable has 3 descendants: sequence, mapping, generator
-# - sequence: iterable with random access. supports slicing
-# - mapping: elements accessed via keys instead of integers
-# - generator: no random access, consume items in order. Only create items when iterate over them.
-#              A function that uses yield returns a generator.
-
-# slicing: create a slice (sequence subset) with start, stop, step
-
-# Built-in collections have Functions to handle data
-
 
 #-----------------------------------------------
 # Error handling
@@ -419,49 +654,6 @@ for k, v in my_dict.items():
 #from modname import name1[, name2[, ... nameN]]
 
 # A search path is a list of directories that the interpreter searches before importing a module. 
-
-
-#-----------------------------------------------
-# Creating module
-
-#https://thomas-cokelaer.info/tutorials/python/packaging.html
-
-#-----------------------------------------------
-print('-----------------------------------------------')
-print('Iterator')
-
-# Iterator behavior can be added to classes. Define  __iter__() and __next__() methods.
-
-print('Generator')
-# Generators: tool for creating iterators. Written like regular functions but use yield statement whenever they want to return data. 
-# Each time next() is called on it, the generator resumes where it left off
-# Local variables and execution state are automatically saved between calls
-def reverse(data):
-    for index in range(len(data)-1, -1, -1):
-        yield data[index]
-
-for char in reverse('golf'):
-     print(char)
-
-
-# Decorators
-
-# Unpacking (*var)
-print("Unpacking")
-my_args = [1, 6, 2]
-
-# call with arguments unpacked from a list
-print(list(range(*my_args)))
-
-# Function Annotations
-print("Function Annotations")
-
-# optional metadata information about the types used by user-defined functions
-def my_annot_func(arg1: str, arg2: str = 'def value') -> str:
-    return arg1 + ' and ' + arg2
-
-result = my_annot_func('value1', 'value2')
-print(result)
 
 #-----------------------------------------------
 # Map filter reduce
@@ -505,24 +697,112 @@ def map_filter_reduce():
 # Call function
 map_filter_reduce()
 
+#-----------------------------------------------
+# File IO
+
+def open_file():
+    try:
+        # open file stream # conteúdo do bloco try
+        file = open('', "r")
+    except IOError: # conteúdo do bloco except
+        print ("There was an error writing to", file_name)
+
+
+
+#-----------------------------------------------
+# Creating module
+
+#https://thomas-cokelaer.info/tutorials/python/packaging.html
+
+#-----------------------------------------------
+# Datetime
+
+
+#---------------------------------------------------
+# C Interface
+
+#---------------------------------------------------
+# Concurrent Execution, Multi-threading
+
+
+#---------------------------------------------------
+# Debugging and Profiling
+
+
+#-----------------------------------------------
+# Functions/Iterators - extra topics
+print('-----------------------------------------------')
+print('Extra')
+
+# Generator
+print('Generator')
+
+# Generators: tool for creating iterators. Written like regular functions but use yield statement whenever they want to return data. 
+# 'yield' returns value (to for loop)
+# for loop calls next() resuming last 'yield' where it left off. Local variables and execution state are automatically saved between calls
+
+# A simple generator function
+def my_gen():
+    print('This is printed first')
+    # Generator function contains yield statements
+    yield 1
+
+    print('This is printed second')
+    yield 2
+
+# Using for loop
+for item in my_gen():
+    print(item)
+
+
+# Decorators
+# decorators wrap a function, modifying its behavior. Receives a function, changes it, returns a function
+# Syntactic Sugar: @decorator -> my_function = decorator(my_function). 
+
+def my_decorator(func):
+    def wrapper():
+        print("Something is happening before the function is called.")
+        func()
+        print("Something is happening after the function is called.")
+    return wrapper
+
+@my_decorator
+def say_whee():
+    print("Whee!")
+
+# Unpacking (*var)
+print("Unpacking")
+my_args = [1, 6, 2]
+
+# call with arguments unpacked from a list
+print(list(range(*my_args)))
+
+# Function Annotations
+print("Function Annotations")
+
+# optional metadata information about the types used by user-defined functions
+def my_annot_func(arg1: str, arg2: str = 'def value') -> str:
+    return arg1 + ' and ' + arg2
+
+result = my_annot_func('value1', 'value2')
+print(result)
+
+
+
 #---------------------------------------------------
 # Standard Library
 
-# Built in functions
-# https://docs.python.org/3/library/functions.html
+# Refs
+# https://docs.python.org/3/tutorial/stdlib.html
+# https://docs.python.org/3/library/index.html
 
 
-# Python collections module:
-# - namedtuple(): factory function for creating tuple subclasses with named fields
-# - deque: list-like container with fast appends and pops on either end
-# - ChainMap: dict-like class for creating a single view of multiple mappings
-# - Counter: dict subclass for counting hashable objects
-# - OrderedDict: dict subclass that remembers the order entries were added
-# - defaultdict: dict subclass that calls a factory function to supply missing values
-
-# Others...
-
-
-# heapq: heap queue
-
-# numbers, decimal, fractions
+# Operating System Interface
+# File handling
+# I/O
+# Mathematics
+# Internationalization
+# Internet Protocols, Data Handling
+# Multi-threading
+# Logging
+# ...

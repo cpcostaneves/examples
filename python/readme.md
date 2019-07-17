@@ -5,44 +5,51 @@ Base Python 3.6
 ## Language
 
 
-Scripting language, Interpreted. Can be compiled to byte-code.
+Scripting language. Interpreted. Converted to Python bytecode before execution. 
+Bytecode is a set of instructions for a virtual machine (Python interpreter).
 
-Supports interactive mode 
+Supports interactive mode.
 
 Supports functional and structured programming methods as well as OOP.
-
-Case sensitive
 
 Types:
 - dynamically typed language: variable name is bound only to an object not a type (unless it is null).
 - strongly typed language: explicit conversion is required (eg. from int to string).
 - supports dynamic type checking.
 
-Blocks of code:
-- Blocks of code are denoted by line indentation
-- A group of statements in a single code block are called suites. 
-- Compound or complex statements, such as if, while, def, and class require a header line and a suite.
-- Header lines begin the statement and terminate with a colon ( : ), followed by suite.
-
 Supports automatic garbage collection.
-
-Semicolon ( ; ) allows multiple statements on the single line
 
 Comment: '#' or ''' for multiline 
 
-Reserved Words
+Case sensitive. Identifier restrictions and reserved words (eg. cannot start with a number or use 'def').
 
+Blocks of code:
+- Blocks of code are denoted by line indentation.
+- A group of statements in a single code block are called 'suites'. 
+- Compound or complex statements, such as if, while, def, and class require a header line and a suite.
+- Header lines begin the statement and terminate with a colon ( : ), followed by suite.
+```
+if condition:
+    statement1
+    statement1
+    ....
+```
+
+Semicolon ( ; ) allows multiple statements on the single line
+
+
+Versions: python 2.X legacy; python 3.6, 3.7 more recent. Keep version in mind.
 
 ## Naming conventions
 
 Class names start with an uppercase letter. All other identifiers start with a lowercase letter.
-Starting an identifier with a single leading underscore indicates that the identifier is private.
-Starting an identifier with two leading underscores indicates a strongly private identifier.
-If the identifier also ends with two trailing underscores, the identifier is a language-defined special name.
+Starting with a single leading underscore (eg. _ident) is a protected or private identifier.
+Starting with two leading underscores (eg. __ident) indicates a strongly private identifier.
+If the identifier also ends with two trailing underscores (eg. ident__), the identifier is a language-defined special name.
 
 ## Coding Style
 
-PEP 8 style guide
+PEP 8 style guide (Python Enhancement Proposal)
 - Use 4-space indentation, and no tabs.
 - Wrap lines so that they don’t exceed 79 characters.
 - Use blank lines to separate functions and classes, and larger blocks of code inside functions.
@@ -60,9 +67,9 @@ Modes
 - Script Mode Programming
 
 
-## Running a script
+## Install Python
 
-Python 3; easy_install and Pip; virtualenv
+Python 3
 
 Install python3
 - Linux Yum based
@@ -74,25 +81,27 @@ $ sudo yum -y install python3
 $ sudo apt -y install python3
 ```
 
-Install pip (package-management system)
+## Running interactive mode
+
 ```
-$ sudo python3 -m easy_install pip
+$ python
 ```
 
-Install virtualenv
+Enter instructions
 ```
-$ sudo pip install virtualenv
+print("hello")
 ```
 
-
-## Running a script
+## Running a script calling python
 
 Run
 ```
 python file.py
 ```
 
-Or as shell script. Include first line of file
+## Running a shell script
+
+As shell script. Include first line of file
 ```
 #!/usr/bin/env python
 ```
@@ -118,7 +127,19 @@ Common Examples in examples.py
 
 Run
 ```
-python3 examples.py
+python examples.py
+```
+
+## Run inside Virtual Environment
+
+Install pip (package-management system)
+```
+$ sudo python3 -m easy_install pip
+```
+
+Install virtualenv
+```
+$ sudo pip install virtualenv
 ```
 
 Run in virtualenv
