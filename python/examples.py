@@ -10,15 +10,8 @@ print('-----------------------------------------------')
 print('Hello Python')
 
 # Change line ending
-print('no line braking', end='')
-
-# after change end, must restore
-#print(end='\n')
-
-print('Hello Python')
-print('Hello Python')
-
-
+print('new line - ', end='')
+print('no line breaking')
 
 #-----------------------------------------------
 # Comments
