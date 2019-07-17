@@ -489,8 +489,6 @@ for k, v in my_dict.items():
 # When there are no more elements, __next__() raises a StopIteration exception which tells the for loop to terminate. 
 
 
-
-
 # Iterator behavior can be added to classes. Define  __iter__() and __next__() methods.
 # Generator (Function with 'yield' statement) creates an interator.
 
@@ -596,6 +594,18 @@ my_list_func = [1, 2, 3, 4]
 print(my_list_func)
 my_function_pass_ref(my_list_func)
 print(my_list_func)
+
+
+#------------------------------------
+# Function as argument
+
+def my_function_pass_func(param1, param2):
+    return param1(param2)
+
+def my_param_func(num):
+    return num * num
+
+print(my_function_pass_func(my_param_func, 7))
 
 #------------------------------------
 # Docstrings
@@ -795,6 +805,7 @@ def open_file():
 print('-----------------------------------------------')
 print('Extra')
 
+#-------------------------------
 # Generator
 print('Generator')
 
@@ -816,7 +827,10 @@ for item in my_gen():
     print(item)
 
 
+#-------------------------------
 # Decorators
+print('Decorators')
+
 # decorators wrap a function, modifying its behavior. Receives a function, changes it, returns a function
 # Syntactic Sugar: @decorator -> my_function = decorator(my_function). 
 
@@ -828,9 +842,12 @@ def my_decorator(func):
     return wrapper
 
 @my_decorator
-def say_whee():
-    print("Whee!")
+def print_a_value():
+    print("a value")
 
+print_a_value()
+
+#-------------------------------
 # Unpacking (*var)
 print("Unpacking")
 my_args = [1, 6, 2]
@@ -838,6 +855,7 @@ my_args = [1, 6, 2]
 # call with arguments unpacked from a list
 print(list(range(*my_args)))
 
+#-------------------------------
 # Function Annotations
 print("Function Annotations")
 
@@ -847,7 +865,6 @@ def my_annot_func(arg1: str, arg2: str = 'def value') -> str:
 
 result = my_annot_func('value1', 'value2')
 print(result)
-
 
 
 #---------------------------------------------------
