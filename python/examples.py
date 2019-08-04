@@ -192,6 +192,7 @@ print(my_tuple[3])
 
 #-----------------------------
 # Set
+# not ordered
 print('Set')
 nonunique_list = [20, 21, 22, 21, 20]
 unique_list = set(nonunique_list)
@@ -307,7 +308,6 @@ print(len(my_dict))
 # get lists
 print(list(my_dict.keys()))
 print(list(my_dict.values()))
-
 
 #-----------------------------
 # Sequence and mappings methods
@@ -468,7 +468,7 @@ while (count < 9):
 for i in range(1, 6, 2):
     print(i)
 
-loop_list = [1,2,3,4,5]
+loop_list = [21,32,43,54,65]
 for i in range(len(loop_list)):
     print(i, end=', ')
 print(end='\n')
@@ -595,6 +595,15 @@ print(my_list_func)
 my_function_pass_ref(my_list_func)
 print(my_list_func)
 
+# Base types are copied
+def my_func_change_param(param1):
+    param1 = 10
+
+my_var = 5
+print(my_var)
+my_func_change_param(my_var)
+print(my_var)
+
 
 #------------------------------------
 # Function as argument
@@ -606,6 +615,24 @@ def my_param_func(num):
     return num * num
 
 print(my_function_pass_func(my_param_func, 7))
+
+#-----------------------------
+# Global vs Local Variables. Force local ('local')
+
+# Variables are valid inside the scope they are declared.
+
+# Global 
+my_global_var = 5
+
+def my_func_global(param1, param2):
+    # To use a global inside a function need declare first
+    global my_global_var
+    my_global_var = 5
+    return param1 + param2
+
+
+
+# Note: Use Locals as much as possible
 
 #------------------------------------
 # Docstrings
@@ -628,8 +655,7 @@ my_lambda_function = lambda x: x*2
 print('\nLambda function:')
 print(my_lambda_function(100))
 
-#-----------------------------
-# Global vs Local Variables. Force local ('local')
+
 
 #-----------------------------------------------
 print('-----------------------------------------------')
@@ -695,16 +721,22 @@ print(myinstance.name)
 #-----------------------------------------------
 # Error handling
 
-#try:
+try:
     #sentence - do something
+    vare = 5 / 0
+except ZeroDivisionError: 
+    print('exception ZeroDivisionError')
 #except ValueError:
     # error handling
-    #pass
+    # pass
 #except (RuntimeError, TypeError, NameError):
-    #pass
-#finally:
+    # pass
+else:
+    # if no exception
+    print('exception else')
+finally:
     #Clean-up Actions
-    #pass
+    print('exception finally')
 
 # if exception type matches the exception named after the except keyword, the except clause is execute
 
@@ -715,6 +747,7 @@ print(myinstance.name)
 # Class derived from the Exception class
 
 # Assert
+# assert (value >= 0), 'Assert!!!.'
 
 #-----------------------------------------------
 # Using module
@@ -723,6 +756,9 @@ print(myinstance.name)
 #import module1[, module2[,... moduleN]
 # import specific attributes from a module
 #from modname import name1[, name2[, ... nameN]]
+
+from datetime import datetime, timedelta
+import time
 
 # A search path is a list of directories that the interpreter searches before importing a module. 
 
@@ -769,36 +805,44 @@ def map_filter_reduce():
 map_filter_reduce()
 
 #-----------------------------------------------
-# File IO
-
-def open_file():
-    try:
-        # open file stream # conteúdo do bloco try
-        file = open('', "r")
-    except IOError: # conteúdo do bloco except
-        print ("There was an error writing to", file_name)
-
-
-
-#-----------------------------------------------
 # Creating module
 
-#https://thomas-cokelaer.info/tutorials/python/packaging.html
+# Create subdir, 
+# place "__init__.py" or as an empty file or importing subfiles
+# place implemantation files
+
+# Eg.
+# If __init__.py is importing files
+import my_package
+my_package.pack_func(5)
+
+# If __init__.py is empty
+#from my_package.my_pack_file import pack_func
+#pack_func(5)
+
 
 #-----------------------------------------------
 # Datetime
+print('-----------------------------------------------')
+print('Datetime')
 
 
-#---------------------------------------------------
-# C Interface
+from datetime import datetime, timedelta
+import time
 
-#---------------------------------------------------
-# Concurrent Execution, Multi-threading
+date_now = datetime.now()
 
+print(str(date_now))
 
-#---------------------------------------------------
-# Debugging and Profiling
+date_10s_past = date_now - timedelta(seconds=10)
 
+print(str(date_10s_past))
+
+# datetime, time : date time functions
+
+# Sleep 
+# Sleep in seconds
+#time.sleep(5)
 
 #-----------------------------------------------
 # Functions/Iterators - extra topics
@@ -825,6 +869,20 @@ def my_gen():
 # Using for loop
 for item in my_gen():
     print(item)
+
+
+
+#-----------------------------------------------
+# File IO
+
+try:
+    # open file stream # conteúdo do bloco try
+    file = open('file.txt', "r")
+    content = file.read(10)
+    print('Lendo string: ', content) 
+    file.close() 
+except IOError: # conteúdo do bloco except
+    print ("There was an error opening file")
 
 
 #-------------------------------
@@ -866,6 +924,74 @@ def my_annot_func(arg1: str, arg2: str = 'def value') -> str:
 result = my_annot_func('value1', 'value2')
 print(result)
 
+#---------------------------------------------------
+# C Interface
+
+'''
+from ctypes import *
+
+# C/C++ Shared Object (libfunc.so) with header:
+# For C use: "extern" ; for C++ use; extern "C"
+# extern "C" {
+#   int my_c_function(int var1, char * var2, struct * var3);
+# }
+
+# load .so with C or C++ functions exported as C
+libfunc = cdll.LoadLibrary('./libfunc.so')
+
+# define class to map C struct
+class my_c_type(Structure):
+    _fields_ = [
+        ("field1", c_uint),
+        ("field2", c_uint)]
+
+# define function as a method, including arguments and result types
+libfunc.my_c_function.argtypes = [c_int, c_char_p, POINTER(my_c_type)]
+libfunc.my_c_function.restype = c_int
+
+# Use [] for no argument list
+# Use None if no result.
+
+# Create a wrapper function
+def my_c_function(my_int, my_string, my_struct):
+
+    my_int_wrap = int(my_int)
+    my_string_wrap = my_string.encode('utf-8')
+    return libfunc.my_c_function(my_int_wrap, my_string_wrap, my_struct)
+
+# Call it
+my_c_struct = my_c_type(4, -1)
+my_ret = libfunc.my_c_function(4, 'some string', my_c_struct)
+'''
+
+#---------------------------------------------------
+# Concurrent Execution, Multi-threading
+
+#----------------------------------------
+# Multi-threading with timeout
+from threading import Thread
+
+# Define function to run as thread
+def func_run_thread(param1, param2):
+    return str(param1) + param2
+
+# Start thread using function with arguments
+func_thread = Thread(target=func_run_thread, args = [2, 'string'])
+func_thread.start()
+# Timeout to wait in seconds
+func_thread.join(timeout=int(10))
+# Check if is still running (timeout)
+if func_thread.isAlive():
+    # still running (timeout)
+    pass
+
+#---------------------------------------------------
+# Logging
+
+
+
+#---------------------------------------------------
+# Debugging and Profiling
 
 #---------------------------------------------------
 # Standard Library
