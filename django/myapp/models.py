@@ -10,6 +10,7 @@ class Person(models.Model):
     )
     id = models.AutoField(primary_key = True)
     name = models.CharField(max_length = 128, db_index = True)
+    email = models.EmailField(blank = True)
     location = models.CharField("Verbose Location Title", max_length = 20, blank = True)
     add_date = models.DateField(blank = True)
     num_stars = models.IntegerField(blank = True)
