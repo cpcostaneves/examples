@@ -678,6 +678,7 @@ class BaseClass:
     # Constructor (optional)
     def __init__(self, new_number):
         # Creates and init number attribute
+        print("BaseClass __init__")
         self.number = new_number
 
     # Method
@@ -694,10 +695,29 @@ class ExtendedClass(BaseClass):
     # Attributes - default
     name = 'default name'
 
+    # __* = Private. Unaccessible outside class
+    __my_private = 4
+
+    # _* = Protected. Notation only, still can be accessed outside class
+    _my_protected = 10
+
+    #def __init__(self, new_number):
+        #print("ExtendedClass __init__")
+        # super calls base class methods
+        #super().__init__(new_number)
+        #self.number = new_number
+    
+
     def change_name(self, new_name):
+        # Can set private
+        __my_private = 100
+        # super calls base class methods
+        #super().change_name(new_name)
         self.name = new_name
 
-# Use extended class (will call base class constructor)
+# Use extended class
+# if extended class has no __init__ will call base class constructor
+print("\nInstantiate object")
 myinstance = ExtendedClass(10)
 
 # Print attributes
@@ -720,10 +740,13 @@ print(myinstance.name)
 
 #-----------------------------------------------
 # Error handling
+print('-----------------------------------------------')
+print('Error handling')
 
 try:
     #sentence - do something
-    vare = 5 / 0
+    varnum = 5 / 0
+# if exception type matches the exception named after the except keyword, the except clause is execute
 except ZeroDivisionError: 
     print('exception ZeroDivisionError')
 #except ValueError:
@@ -735,10 +758,9 @@ else:
     # if no exception
     print('exception else')
 finally:
-    #Clean-up Actions
+    # exception, clean-up Actions
     print('exception finally')
 
-# if exception type matches the exception named after the except keyword, the except clause is execute
 
 #Raising Exceptions
 #raise NameError('HiThere')
@@ -747,18 +769,24 @@ finally:
 # Class derived from the Exception class
 
 # Assert
-# assert (value >= 0), 'Assert!!!.'
+# if condition returns False, AssertionError is raised:
+#value = -5
+#assert (value >= 0), 'Assert!!!.'
 
 #-----------------------------------------------
-# Using module
+# Using modules
+print('-----------------------------------------------')
+print('Using modules')
+
 
 # Import modules in search path
 #import module1[, module2[,... moduleN]
 # import specific attributes from a module
 #from modname import name1[, name2[, ... nameN]]
 
-from datetime import datetime, timedelta
+# eg.
 import time
+from datetime import datetime, timedelta
 
 # A search path is a list of directories that the interpreter searches before importing a module. 
 
@@ -806,19 +834,37 @@ map_filter_reduce()
 
 #-----------------------------------------------
 # Creating module
+print('-----------------------------------------------')
+print('Creating module')
 
-# Create subdir, 
-# place "__init__.py" or as an empty file or importing subfiles
-# place implemantation files
+# Create subdir, and create file "__init__.py" 
+# "__init__.py": empty file or importing subfiles
+# create implemantation files
 
 # Eg.
 # If __init__.py is importing files
 import my_package
-my_package.pack_func(5)
+my_package.pack_func(10)
 
-# If __init__.py is empty
-#from my_package.my_pack_file import pack_func
-#pack_func(5)
+
+# Or direct import (__init__.py can be empty) 
+
+# Direct import a file (and its functions)
+from my_package import pack_file
+pack_file.pack_func(30)
+
+# Direct import a file in subdir
+from my_package.pack_subdir import subdir_file
+subdir_file.pack_subdir_func(50)
+
+# Direct import a function from file
+from my_package.pack_file import pack_func
+pack_func(70)
+
+
+# Direct import a function in a file in subdir
+from my_package.pack_subdir.subdir_file import pack_subdir_func
+pack_subdir_func(90)
 
 
 #-----------------------------------------------
@@ -827,22 +873,34 @@ print('-----------------------------------------------')
 print('Datetime')
 
 
+# datetime, time : date time functions
 from datetime import datetime, timedelta
 import time
 
 date_now = datetime.now()
-
 print(str(date_now))
 
 date_10s_past = date_now - timedelta(seconds=10)
-
 print(str(date_10s_past))
-
-# datetime, time : date time functions
 
 # Sleep 
 # Sleep in seconds
 #time.sleep(5)
+
+#-----------------------------------------------
+# File IO
+print('-----------------------------------------------')
+print('File IO')
+
+try:
+    # open file stream # conteúdo do bloco try
+    file = open('file.txt', "r")
+    content = file.read(10)
+    print('File Content: ', content) 
+    file.close() 
+except IOError:
+    print ("There was an error opening file")
+
 
 #-----------------------------------------------
 # Functions/Iterators - extra topics
@@ -871,22 +929,9 @@ for item in my_gen():
     print(item)
 
 
-
-#-----------------------------------------------
-# File IO
-
-try:
-    # open file stream # conteúdo do bloco try
-    file = open('file.txt', "r")
-    content = file.read(10)
-    print('Lendo string: ', content) 
-    file.close() 
-except IOError: # conteúdo do bloco except
-    print ("There was an error opening file")
-
-
 #-------------------------------
 # Decorators
+print('-------------------')
 print('Decorators')
 
 # decorators wrap a function, modifying its behavior. Receives a function, changes it, returns a function
@@ -907,6 +952,7 @@ print_a_value()
 
 #-------------------------------
 # Unpacking (*var)
+print('-------------------')
 print("Unpacking")
 my_args = [1, 6, 2]
 
@@ -915,6 +961,7 @@ print(list(range(*my_args)))
 
 #-------------------------------
 # Function Annotations
+print('-------------------')
 print("Function Annotations")
 
 # optional metadata information about the types used by user-defined functions
@@ -926,6 +973,8 @@ print(result)
 
 #---------------------------------------------------
 # C Interface
+print('-----------------------------------------------')
+print("C Interface")
 
 '''
 from ctypes import *
@@ -966,32 +1015,107 @@ my_ret = libfunc.my_c_function(4, 'some string', my_c_struct)
 
 #---------------------------------------------------
 # Concurrent Execution, Multi-threading
+print('-----------------------------------------------')
+print("Concurrent Execution, Multi-threading")
 
 #----------------------------------------
 # Multi-threading with timeout
 from threading import Thread
+import time
 
 # Define function to run as thread
 def func_run_thread(param1, param2):
+    print("func_run_thread()")
+    #time.sleep(5)
     return str(param1) + param2
 
 # Start thread using function with arguments
 func_thread = Thread(target=func_run_thread, args = [2, 'string'])
+
+print("func_thread.start()")
 func_thread.start()
 # Timeout to wait in seconds
-func_thread.join(timeout=int(10))
+func_thread.join(timeout=int(2))
+print("func_thread.join()")
 # Check if is still running (timeout)
 if func_thread.isAlive():
     # still running (timeout)
+    print("func_thread still running")
     pass
 
 #---------------------------------------------------
 # Logging
+print('-----------------------------------------------')
+print("Logging")
 
+#Logging module
+import logging
 
+# Default logger = stdout / console
+
+#------------
+# Basic usage: logging
+# Global Format and threshold (CRITICAL, ERROR, WARNING, INFO, DEBUG)
+logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s', level=logging.INFO)
+
+# Use Severity level to log
+# debug, info, warning, error, critical, eg.
+logging.info('logging just an info')
+logging.error('logging this is an error')
+
+# Also: logging.log (pass integer as logging level), logging.exception (level ERROR, use in exception handler)
+
+# Parameters (msg, *args, **kwargs)
+# args: merged in string 
+# kwargs dict with key=value pair with key in format (eg. format=... '%(clientip)s', passing {'clientip': '192.168.0.1'})
+
+# Possible to use complex filtering with filter()
+
+#------------
+# Custom loggers and formatters: logger
+# Get logger passing some id name. Use __name__ to get current module name
+logger = logging.getLogger(__name__)
+
+# Set threshold based on Severity
+logger.setLevel(logging.DEBUG)
+
+# Log
+logger.info('logger just an info')
+logger.error('logger this is an error')
+
+# Handlers libs
+# Cloudwatch
+#import watchtower
+#logger.addHandler(watchtower.CloudWatchLogHandler(log_group="mygroup", stream_name="mystream"))
+
+# Logstash
+#import logstash
+#logger.addHandler(logstash.TCPLogstashHandler(host, 5044, version=1))
+
+# Custom logger can be created extending logging.Handler class with emit() method
+#class MyLogHandler(Handler):
+#    def emit(self, record):
+#       log_entry = self.format(record)
+#       return requests.post('http://example.com:8080/', log_entry, headers={"Content-type": "application/json"}).content
+
+# Custom formatter can be created extending logging.Formatter class, with format() method
+#class MyLogFormatter(Formatter):
+#    def format(self, record):
+#        data = {'@message': record.msg,
+#                '@timestamp': datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.%fZ'),
+#                '@type': 'Worker'}
+#        return json.dumps(data)
+
+# Use
+#handler = MyLogHandler()
+#formatter = MyLogFormatter(__name__)
+#handler.setFormatter(formatter)
+#logger.addHandler(handler)
 
 #---------------------------------------------------
 # Debugging and Profiling
+
+# https://docs.python.org/3/library/debug.html
 
 #---------------------------------------------------
 # Standard Library

@@ -43,7 +43,7 @@ Versions: python 2.X legacy; python 3.6, 3.7 more recent. Keep version in mind.
 ## Naming conventions
 
 Class names start with an uppercase letter. All other identifiers start with a lowercase letter.
-Starting with a single leading underscore (eg. _ident) is a protected or private identifier.
+Starting with a single leading underscore (eg. _ident) is a protected  identifier.
 Starting with two leading underscores (eg. __ident) indicates a strongly private identifier.
 If the identifier also ends with two trailing underscores (eg. ident__), the identifier is a language-defined special name.
 
