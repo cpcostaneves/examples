@@ -992,7 +992,7 @@ libfunc = cdll.LoadLibrary('./libfunc.so')
 class my_c_type(Structure):
     _fields_ = [
         ("field1", c_uint),
-        ("field2", c_uint)]
+        ("field2", c_int)]
 
 # define function as a method, including arguments and result types
 libfunc.my_c_function.argtypes = [c_int, c_char_p, POINTER(my_c_type)]
@@ -1010,7 +1010,7 @@ def my_c_function(my_int, my_string, my_struct):
 
 # Call it
 my_c_struct = my_c_type(4, -1)
-my_ret = libfunc.my_c_function(4, 'some string', my_c_struct)
+my_ret = my_c_function(8, 'some string', my_c_struct)
 '''
 
 #---------------------------------------------------

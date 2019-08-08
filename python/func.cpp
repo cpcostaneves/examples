@@ -25,7 +25,7 @@
 // Public Functions
 
 //---------------------------------------------------------------------------
-int my_c_function(int var1, char * var2, my_c_struct * var3)
+int my_c_function(int var1, char * var2, my_c_type * var3)
 {
     std::cout << "C/C++ Function, var1: " << var1 << " var2: " << var2 << std::endl;
     std::cout << "C/C++ Function, var3.field1: " << var3->field1 << " var3.field2: " << var3->field2 << std::endl;
