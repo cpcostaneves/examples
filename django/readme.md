@@ -18,6 +18,22 @@ Access Admin interface
 API (GET / POST / PATCH / DELETE):
 - http://127.0.0.1:8000/persons/
 
+# Django migrations
+
+Rollback migration
+```
+python manage.py migrate <name_of_app> <rollback_migration_name>
+```
+
+List migrations
+```
+python manage.py showmigrations
+```
+
+Fake migration
+```
+python manage.py migrate --fake
+```
 
 ## Refs
 
