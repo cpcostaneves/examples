@@ -142,12 +142,16 @@ print(my_string_escap)
 print(my_string_squot)
 print(my_string_dquot)
 
-# formating
-my_format = 'This is the first: {}, and this is the secoond: {}'.format(34, 'other string')
+# formating with .format
+my_format = 'This is the first: {}, and this is the second: {}'.format(34, 'other string')
 print(my_format)
 
 my_format_ordered = 'This is the second: {1}, and this is the first: {0}'.format(34, 'other string')
 print(my_format_ordered)
+
+# formating with f string
+my_format_f = f'This is the first: {34}, and this is the second: {'other string'}'
+print(my_format_f)
 
 # formatter operations available (eg. pad, align)
 # ref: https://pyformat.info/
@@ -754,6 +758,9 @@ except ZeroDivisionError:
     # pass
 #except (RuntimeError, TypeError, NameError):
     # pass
+except BaseException as error:
+    # Generic error handling
+    logger.error(f"exception BaseException: {error}")
 else:
     # if no exception
     print('exception else')
